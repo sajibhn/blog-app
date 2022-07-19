@@ -1,8 +1,13 @@
 import express from 'express'
+import mongoose from 'mongoose'
+import router from './routes/user-routes.js';
 const app = express();
 
-app.use("/", (req, res) => {
-    res.send("hello world")
-})
+app.use('/api/user', router)
 
-app.listen(5000)
+mongoose.connect('mongodb+srv://sajib:1234@cluster0.uw6p9.mongodb.net/Blog?retryWrites=true&w=majority')
+    .then(() => app.listen(5000))
+    .then(() => console.log('connected db and port'))
+    .catch((err) => console.log(err))
+
+
